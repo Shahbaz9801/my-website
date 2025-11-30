@@ -510,3 +510,338 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log('Enhanced DataSolution website initialized successfully!');
 });
 
+// ===== ENHANCED AI CHATBOT FUNCTIONALITY =====
+function initChatbot() {
+    const floatingChatbot = document.getElementById('floatingChatbot');
+    const chatbotModal = document.getElementById('chatbotModal');
+    const chatbotClose = document.getElementById('chatbotClose');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const chatbotSend = document.getElementById('chatbotSend');
+    const quickActions = document.querySelectorAll('.quick-action');
+    const suggestionBtns = document.querySelectorAll('.suggestion-btn');
+
+    // Enhanced Responses Database
+    const responses = {
+        // Service Information
+        "services": `We offer comprehensive data services:
+
+• Data Entry & Management
+  - Product catalog management
+  - Database administration
+  - PDF to Excel conversion
+  - Customer record organization
+
+• Data Cleaning & Standardization
+  - Duplicate removal
+  - Data formatting & validation
+  - Missing value handling
+  - Quality assurance
+
+• Business Analytics
+  - Sales performance analysis
+  - Customer behavior tracking
+  - KPI monitoring
+  - Growth opportunity identification
+
+• Dashboard & Reporting
+  - Looker Studio dashboards
+  - Power BI reports
+  - Automated reporting
+  - Real-time KPI tracking
+
+• E-commerce Support
+  - Product catalog optimization
+  - Marketplace integration
+  - Bulk upload preparation
+  - SEO-friendly product data
+
+All services include 99.8% accuracy guarantee and quality assurance.`,
+
+        "pricing": `Our transparent pricing structure:
+
+Data Entry Services:
+• Basic Data Entry: Starting at $99
+• Advanced Processing: $149 - $299
+• Bulk Projects: Custom pricing
+
+Data Cleaning:
+• Standard Cleaning: $149 - $349
+• Complex Data Sets: $349 - $699
+• Enterprise Level: Custom quote
+
+Analytics & Dashboards:
+• Basic Analysis: $199 - $499
+• Advanced Analytics: $499 - $1,199
+• Custom Dashboards: $249 - $999
+
+Factors affecting pricing:
+• Data volume and complexity
+• Required turnaround time
+• Data source formats
+• Level of customization
+
+We offer free samples and detailed quotes based on your specific requirements.`,
+
+        "process": `Our 4-step quality process:
+
+1. REQUIREMENT ANALYSIS
+   - Project scope definition
+   - Timeline planning
+   - Resource allocation
+   - Client consultation
+
+2. DATA PROCESSING
+   - Expert data handling
+   - Quality standards implementation
+   - Regular progress updates
+   - Client communication
+
+3. QUALITY ASSURANCE
+   - Automated validation checks
+   - Manual expert review
+   - Error correction
+   - 99.8% accuracy verification
+
+4. DELIVERY & SUPPORT
+   - Secure file delivery
+   - Project documentation
+   - Ongoing support
+   - Revision cycles
+
+Standard delivery times:
+• Data Entry: 48 hours
+• Data Cleaning: 24 hours
+• Analytics: 72 hours
+• Dashboards: 5 days`,
+
+        "default": `Thank you for your question. I'm trained to provide detailed information about:
+
+• Our comprehensive data services
+• Transparent pricing structure
+• Quality assurance process
+• Project timelines and delivery
+• Technical capabilities
+• Industry-specific solutions
+
+Could you please specify which aspect you'd like to know more about? I can provide detailed, actionable information to help with your data project planning.`
+    };
+
+    // Specific question handlers
+    const questionHandlers = {
+        "What data services do you offer?": "services",
+        "What is your pricing structure?": "pricing",
+        "How long does data cleaning take?": "Our standard data cleaning service is delivered within 24 hours. Complex projects or large datasets (50,000+ records) may take 48-72 hours. We offer expedited services for urgent projects.",
+        "Do you work with large datasets?": "Yes, we specialize in handling large datasets. Our capabilities include:\n\n• Up to 1 million+ records\n• Multiple data formats\n• Complex data relationships\n• Enterprise-level processing\n\nWe have optimized workflows for large-scale data projects with maintained accuracy and efficiency.",
+        "What file formats do you support?": "We support all major file formats:\n\n• Spreadsheets: CSV, XLSX, XLS\n• Documents: PDF, DOC, DOCX\n• Databases: SQL, Access\n• Images: JPEG, PNG (for data extraction)\n• APIs and web scraping\n\nWe can work with any format and help migrate between formats as needed.",
+        "How do you ensure data security?": "We implement comprehensive security measures:\n\n• Secure file transfer protocols\n• NDA agreements for all projects\n• Encrypted data storage\n• Access control systems\n• Regular security audits\n• GDPR and compliance adherence\n\nYour data security and confidentiality are our top priorities."
+    };
+
+    // Toggle chatbot modal
+    floatingChatbot.addEventListener('click', function() {
+        chatbotModal.classList.toggle('active');
+        // Remove notification dot when opened
+        document.querySelector('.notification-dot').style.display = 'none';
+    });
+
+    chatbotClose.addEventListener('click', function() {
+        chatbotModal.classList.remove('active');
+    });
+
+    // Close modal when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!chatbotModal.contains(event.target) && !floatingChatbot.contains(event.target)) {
+            chatbotModal.classList.remove('active');
+        }
+    });
+
+    // Send message function
+    function sendMessage(message, isUser = true) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'sent' : 'received'}`;
+        
+        const avatarIcon = isUser ? 'fas fa-user' : 'fas fa-robot';
+        
+        messageDiv.innerHTML = `
+            <div class="message-avatar">
+                <i class="${avatarIcon}"></i>
+            </div>
+            <div class="message-content">
+                <div class="message-text">${formatMessage(message)}</div>
+                <div class="message-time">${getCurrentTime()}</div>
+            </div>
+        `;
+        
+        chatbotMessages.appendChild(messageDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        
+        if (!isUser) {
+            // Add quick actions after bot response
+            setTimeout(addQuickActions, 300);
+        }
+    }
+
+    // Format message with proper line breaks
+    function formatMessage(text) {
+        return text.replace(/\n/g, '<br>');
+    }
+
+    // Get current time
+    function getCurrentTime() {
+        return new Date().toLocaleTimeString('en-US', { 
+            hour: '2-digit', 
+            minute: '2-digit',
+            hour12: true 
+        });
+    }
+
+    // Add quick actions
+    function addQuickActions() {
+        const actions = [
+            { action: 'services', icon: 'fas fa-cogs', text: 'Service Details' },
+            { action: 'pricing', icon: 'fas fa-tag', text: 'Pricing Information' },
+            { action: 'process', icon: 'fas fa-sync-alt', text: 'Our Process' }
+        ];
+
+        const actionsHTML = actions.map(action => `
+            <button class="quick-action" data-action="${action.action}">
+                <i class="${action.icon}"></i>
+                ${action.text}
+            </button>
+        `).join('');
+
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'quick-actions';
+        actionsDiv.innerHTML = actionsHTML;
+
+        // Remove existing quick actions
+        const existingActions = chatbotMessages.querySelector('.quick-actions');
+        if (existingActions) {
+            existingActions.remove();
+        }
+
+        chatbotMessages.appendChild(actionsDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+        // Re-attach event listeners
+        document.querySelectorAll('.quick-action').forEach(btn => {
+            btn.addEventListener('click', handleQuickAction);
+        });
+    }
+
+    // Handle quick actions
+    function handleQuickAction(e) {
+        const action = e.target.closest('.quick-action').getAttribute('data-action');
+        const question = getQuestionFromAction(action);
+        
+        sendMessage(question, true);
+        
+        setTimeout(() => {
+            const response = responses[action] || responses.default;
+            sendMessage(response, false);
+        }, 1000);
+    }
+
+    // Get question text from action
+    function getQuestionFromAction(action) {
+        const questions = {
+            'services': 'What data services do you offer?',
+            'pricing': 'What is your pricing structure?',
+            'process': 'Can you explain your process?'
+        };
+        return questions[action] || 'Tell me about your services';
+    }
+
+    // Handle suggestion buttons
+    suggestionBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const question = this.getAttribute('data-question');
+            sendMessage(question, true);
+            
+            setTimeout(() => {
+                const handlerKey = questionHandlers[question];
+                const response = typeof handlerKey === 'string' ? 
+                    (responses[handlerKey] || questionHandlers[question] || responses.default) : 
+                    responses.default;
+                sendMessage(response, false);
+            }, 1000);
+        });
+    });
+
+    // Handle send button
+    chatbotSend.addEventListener('click', function() {
+        const message = chatbotInput.value.trim();
+        if (message) {
+            sendMessage(message, true);
+            chatbotInput.value = '';
+            
+            setTimeout(() => {
+                const response = getAIResponse(message);
+                sendMessage(response, false);
+            }, 1000);
+        }
+    });
+
+    // Handle enter key
+    chatbotInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            chatbotSend.click();
+        }
+    });
+
+    // Enhanced AI response function
+    function getAIResponse(message) {
+        const lowerMessage = message.toLowerCase();
+        
+        // Service-related queries
+        if (lowerMessage.includes('service') || lowerMessage.includes('offer') || lowerMessage.includes('provide')) {
+            return responses.services;
+        }
+        
+        // Pricing-related queries
+        if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('how much')) {
+            return responses.pricing;
+        }
+        
+        // Process-related queries
+        if (lowerMessage.includes('process') || lowerMessage.includes('how do you') || lowerMessage.includes('workflow')) {
+            return responses.process;
+        }
+        
+        // Timeline queries
+        if (lowerMessage.includes('time') || lowerMessage.includes('how long') || lowerMessage.includes('delivery')) {
+            return "Our standard delivery times:\n\n• Data Entry: 48 hours\n• Data Cleaning: 24 hours\n• Business Analytics: 72 hours\n• Dashboard Creation: 5 days\n\nExpedited options are available for urgent projects.";
+        }
+        
+        // Accuracy queries
+        if (lowerMessage.includes('accuracy') || lowerMessage.includes('quality') || lowerMessage.includes('guarantee')) {
+            return "We guarantee 99.8% accuracy through:\n\n• Double-layer quality checks\n• Automated validation systems\n• Manual expert review\n• Client feedback integration\n\nYour satisfaction is 100% guaranteed with our quality assurance process.";
+        }
+        
+        // Specific question match
+        for (const [question, response] of Object.entries(questionHandlers)) {
+            if (lowerMessage.includes(question.toLowerCase().slice(0, 20))) {
+                return typeof response === 'string' ? (responses[response] || response) : responses.default;
+            }
+        }
+        
+        return responses.default;
+    }
+
+    // Initialize quick actions
+    quickActions.forEach(action => {
+        action.addEventListener('click', handleQuickAction);
+    });
+
+    // Auto-focus input when modal opens
+    floatingChatbot.addEventListener('click', function() {
+        setTimeout(() => {
+            chatbotInput.focus();
+        }, 300);
+    });
+}
+
+// Initialize chatbot when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initChatbot();
+});
