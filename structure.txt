@@ -1,0 +1,8 @@
+DataSolution-Website/
+│
+├── index.html          # Main HTML file
+├── css/
+│   └── style.css       # All CSS styles
+├── js/
+│   └── script.js       # All JavaScript functionality
+└── images/             # Image assets folder
