@@ -42,87 +42,192 @@
         </div>
     </nav>
 
-    <!-- ===== HERO SECTION ===== -->
+<!-- ================================== HERO SECTION ==================================================== -->
     <section class="hero" id="home">
         <!-- Animated Background -->
         <div class="hero-bg-animation">
             <div class="floating-shape shape-1"></div>
             <div class="floating-shape shape-2"></div>
             <div class="floating-shape shape-3"></div>
+            <div class="floating-shape shape-4"></div>
+            <div class="floating-shape shape-5"></div>
         </div>
         
         <div class="container">
-            <div class="hero-content">
-                <!-- Main Heading -->
-                <h1 class="hero-title">
-                    Transform Your Data Into 
-                    <span class="gradient-text">Business Growth</span>
-                </h1>
-                
-                <!-- Subtitle -->
-                <p class="hero-subtitle">
-                    Professional data entry, cleaning, analytics & dashboard solutions with 
-                    <strong>99.8% accuracy guarantee</strong> and <strong>48-hour delivery</strong>
-                </p>
-                
-                <!-- CTA Buttons -->
-                <div class="hero-actions">
-                    <a href="#services" class="btn btn-primary">
-                        <i class="fas fa-chart-line"></i>
-                        Explore Services
-                    </a>
-                    <a href="#free-sample" class="btn btn-secondary">
-                        <i class="fas fa-gift"></i>
-                        Get Free Sample
-                    </a>
+            <div class="hero-grid">
+                <!-- Left Column: Text Content -->
+                <div class="hero-text-content">
+                    <!-- Main Heading -->
+                    <h1 class="hero-title">
+                        Transform Your Data Into 
+                        <span class="gradient-text">Business Growth</span>
+                    </h1>
+                    
+                    <!-- Subtitle -->
+                    <p class="hero-subtitle">
+                        Professional data entry, cleaning, analytics & dashboard solutions with 
+                        <span class="highlight-text">99.8% accuracy guarantee</span> and 
+                        <span class="highlight-text">48-hour delivery</span>
+                    </p>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="hero-actions">
+                        <a href="#services" class="btn btn-primary">
+                            <i class="fas fa-chart-line"></i>
+                            Explore Services
+                        </a>
+                        <a href="#free-sample" class="btn btn-secondary">
+                            <i class="fas fa-gift"></i>
+                            Get Free Sample
+                        </a>
+                    </div>
                 </div>
                 
-                <!-- Statistics -->
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="99.8">0</div>
-                        <div class="stat-label">Accuracy Rate</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="48">0</div>
-                        <div class="stat-label">Hour Delivery</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="500">0</div>
-                        <div class="stat-label">Projects Done</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="98">0</div>
-                        <div class="stat-label">Client Satisfaction</div>
+                <!-- Right Column: Chart Visual -->
+                <div class="hero-visual">
+                    <div class="data-visualization">
+                        <div class="chart-container">
+                            <div class="chart-item">
+                                <div class="chart-wrapper">
+                                    <div class="chart-bar" data-percent="90">
+                                        <div class="bar-fill">
+                                            <div class="bar-glow"></div>
+                                        </div>
+                                        <div class="bar-value">90%</div>
+                                    </div>
+                                </div>
+                                <div class="chart-label">
+                                    <i class="fas fa-keyboard"></i>
+                                    <span>Data Entry</span>
+                                </div>
+                                <div class="chart-description">99.8% Accuracy</div>
+                            </div>
+                            
+                            <div class="chart-item">
+                                <div class="chart-wrapper">
+                                    <div class="chart-bar" data-percent="95">
+                                        <div class="bar-fill">
+                                            <div class="bar-glow"></div>
+                                        </div>
+                                        <div class="bar-value">95%</div>
+                                    </div>
+                                </div>
+                                <div class="chart-label">
+                                    <i class="fas fa-broom"></i>
+                                    <span>Data Cleaning</span>
+                                </div>
+                                <div class="chart-description">24-Hour Delivery</div>
+                            </div>
+                            
+                            <div class="chart-item">
+                                <div class="chart-wrapper">
+                                    <div class="chart-bar" data-percent="85">
+                                        <div class="bar-fill">
+                                            <div class="bar-glow"></div>
+                                        </div>
+                                        <div class="bar-value">85%</div>
+                                    </div>
+                                </div>
+                                <div class="chart-label">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <span>Analytics</span>
+                                </div>
+                                <div class="chart-description">Real-time Insights</div>
+                            </div>
+                            
+                            <div class="chart-item">
+                                <div class="chart-wrapper">
+                                    <div class="chart-bar" data-percent="88">
+                                        <div class="bar-fill">
+                                            <div class="bar-glow"></div>
+                                        </div>
+                                        <div class="bar-value">88%</div>
+                                    </div>
+                                </div>
+                                <div class="chart-label">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>Dashboards</span>
+                                </div>
+                                <div class="chart-description">Custom Solutions</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Chart Grid Lines -->
+                        <div class="chart-grid">
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Hero Visual -->
-            <div class="hero-visual">
-                <div class="data-visualization">
-                    <div class="chart chart-1">
-                        <div class="chart-bar" style="height: 80%"></div>
-                        <span>Data Entry</span>
+            <!-- Full Width Bottom: Statistics Cards -->
+            <div class="hero-stats-wrapper">
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" data-target="99.8">0</div>
+                            <div class="stat-label">Accuracy Rate</div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                +0.5%
+                            </div>
+                        </div>
                     </div>
-                    <div class="chart chart-2">
-                        <div class="chart-bar" style="height: 90%"></div>
-                        <span>Data Cleaning</span>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" data-target="48">0<span class="stat-unit">h</span></div>
+                            <div class="stat-label">Avg. Delivery</div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                Faster
+                            </div>
+                        </div>
                     </div>
-                    <div class="chart chart-3">
-                        <div class="chart-bar" style="height :75%"></div>
-                        <span>Analytics</span>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" data-target="500">0<span class="stat-unit">+</span></div>
+                            <div class="stat-label">Projects Done</div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                +25
+                            </div>
+                        </div>
                     </div>
-                    <div class="chart chart-4">
-                        <div class="chart-bar" style="height :85%"></div>
-                        <span>Dashboards</span>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" data-target="98">0<span class="stat-unit">%</span></div>
+                            <div class="stat-label">Client Satisfaction</div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                +3%
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== TRUST BADGES SECTION ===== -->
+<!-- ============================================ TRUST BADGES SECTION ====================================== -->
+
     <section class="trust-bar">
         <div class="container">
             <p class="trust-title">Trusted by innovative companies worldwide</p>
@@ -151,7 +256,8 @@
         </div>
     </section>
 
-    <!-- ===== SERVICES SECTION ===== -->
+<!-- ========================================= SERVICES SECTION ============================================= -->
+
     <section class="services" id="services">
         <div class="container">
             <!-- Section Header -->
@@ -196,7 +302,7 @@
                 </div>
                 
                 <!-- Service 2: Data Cleaning -->
-                <div class="service-card featured">
+                <div class="service-card">
                     <div class="service-badge">Most Popular</div>
                     <div class="service-icon">
                         <i class="fas fa-broom"></i>
@@ -349,7 +455,8 @@
         </div>
     </section>
 
-    <!-- ===== FREE SAMPLE SECTION ===== -->
+<!-- ======================================== FREE SAMPLE SECTION ======================================= -->
+
     <section class="free-sample" id="free-sample">
         <div class="container">
             <div class="sample-content">
@@ -376,7 +483,7 @@
                         </div>
                     </div>
                     <div class="free-image">
-                        <img src="Copilot_20251130_103535.png" alt="">
+                        <img src="Copilot_20251130_103535.png" alt="Free Sample Illustration">
                     </div>
                 </div>
                 
@@ -385,13 +492,18 @@
                         <h3>Get Your Free Sample</h3>
                         
                         <div class="form-group">
-                            <label for="name">Your Name</label>
+                            <label for="name">Your Name *</label>
                             <input type="text" id="name" name="name" required placeholder="Enter your full name">
                         </div>
                         
                         <div class="form-group">
-                            <label for="email">Email Address</label>
+                            <label for="email">Email Address *</label>
                             <input type="email" id="email" name="email" required placeholder="Enter your email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
                         </div>
                         
                         <div class="form-group">
@@ -400,7 +512,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="service">Service Needed</label>
+                            <label for="service">Service Needed *</label>
                             <select id="service" name="service" required>
                                 <option value="">Select a service</option>
                                 <option value="data-entry">Data Entry & Management</option>
@@ -413,15 +525,15 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="message">Project Details</label>
-                            <textarea id="message" name="message" rows="4" placeholder="Tell us about your data needs, file size, and specific requirements..."></textarea>
+                            <label for="message">Project Details *</label>
+                            <textarea id="message" name="message" rows="4" required placeholder="Tell us about your data needs, file size, and specific requirements..."></textarea>
                         </div>
                         
                         <div class="form-group file-upload-group">
                             <label for="file-upload" class="file-upload-label">
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 <span>Upload Your Data File</span>
-                                <small>Supported formats: CSV, XLSX, PDF, DOC</small>
+                                <small>Supported formats: CSV, XLSX, PDF, DOC (Max 10MB)</small>
                             </label>
                             <input type="file" id="file-upload" name="file" accept=".csv,.xlsx,.xls,.pdf,.doc,.docx">
                             <div class="file-name" id="fileName">No file chosen</div>
@@ -436,248 +548,411 @@
                             <i class="fas fa-lock"></i>
                             Your data is 100% secure. We sign NDA for all projects.
                         </p>
+
+                        <!-- Success Message -->
+                        <div class="success-message" id="successMessage">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Thank you! Your request has been sent successfully.</span>
+                        </div>
+
+                        <!-- Error Message -->
+                        <div class="error-message" id="errorMessage">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Sorry! There was an error sending your request.</span>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== SUCESSES STORY SECTION ===== -->
-    <section class="portfolio" id="portfolio">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Our Success Stories</h2>
-                <p class="section-subtitle">
-                    Real projects, real results. See how we've helped businesses 
-                    transform their data into growth opportunities.
-                </p>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<!-- =========================================== SUCESSES STORY SECTION ================================== -->
+
+    <section class="portfolio-section" id="portfolio">
+    <div class="portfolio-container">
+        <div class="portfolio-section-header">
+            <h2 class="portfolio-section-title">Our Success Stories</h2>
+            <p class="portfolio-section-subtitle">
+                Real projects, real results. See how we've helped businesses 
+                transform their data into growth opportunities.
+            </p>
+            <div class="portfolio-section-controls">
+                <button class="portfolio-filter-btn active" data-filter="all">All Projects</button>
+                <button class="portfolio-filter-btn" data-filter="ecommerce">E-commerce</button>
+                <button class="portfolio-filter-btn" data-filter="analytics">Analytics</button>
+                <button class="portfolio-filter-btn" data-filter="data">Data Processing</button>
+                <button class="portfolio-filter-btn" data-filter="automation">Automation</button>
             </div>
-            
-            <div class="portfolio-grid">
-                <!-- Portfolio Item 1 -->
-                <div class="portfolio-item">
+        </div>
+        
+        <div class="portfolio-grid">
+            <!-- Portfolio Item 1 -->
+            <div class="portfolio-item" data-category="ecommerce">
+                <div class="portfolio-image-wrapper">
                     <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="E-commerce Catalog Management" class="portfolio-img">
+                        <div class="portfolio-image-overlay"></div>
                         <div class="portfolio-overlay">
                             <div class="portfolio-category">E-commerce</div>
-                            <h3>Amazon Seller Catalog Optimization</h3>
-                            <p>Processed 10,000+ products with 99.9% accuracy</p>
+                            <h3 class="portfolio-overlay-title">Amazon Seller Catalog Optimization</h3>
+                            <p class="portfolio-overlay-desc">Processed 10,000+ products with 99.9% accuracy</p>
                             <div class="portfolio-stats">
-                                <div class="stat">
+                                <div class="portfolio-stat">
                                     <strong>99.9%</strong>
                                     <span>Accuracy</span>
                                 </div>
-                                <div class="stat">
+                                <div class="portfolio-stat">
                                     <strong>48h</strong>
                                     <span>Delivery</span>
                                 </div>
-                                <div class="stat">
+                                <div class="portfolio-stat">
                                     <strong>25%</strong>
                                     <span>Sales Increase</span>
                                 </div>
                             </div>
+                            <a href="#" class="portfolio-view-btn">View Case Study <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
-                    <div class="portfolio-content">
-                        <h3>E-commerce Catalog Management</h3>
-                        <p class="portfolio-description">
-                            Complete product catalog optimization for a major Amazon seller, 
-                            including data entry, image optimization, and SEO-friendly descriptions.
-                        </p>
-                        <div class="portfolio-features">
-                            <span class="feature-tag">Data Entry</span>
-                            <span class="feature-tag">Image Processing</span>
-                            <span class="feature-tag">SEO Optimization</span>
-                        </div>
+                    <div class="portfolio-image-badge">
+                        <i class="fas fa-shopping-cart"></i>
                     </div>
                 </div>
-                
-                <!-- Portfolio Item 2 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-category">Analytics</div>
-                            <h3>Sales Performance Dashboard</h3>
-                            <p>Real-time KPI tracking for retail chain</p>
-                            <div class="portfolio-stats">
-                                <div class="stat">
-                                    <strong>15+</strong>
-                                    <span>KPIs Tracked</span>
-                                </div>
-                                <div class="stat">
-                                    <strong>Real-time</strong>
-                                    <span>Updates</span>
-                                </div>
-                                <div class="stat">
-                                    <strong>30%</strong>
-                                    <span>Time Saved</span>
-                                </div>
+                <div class="portfolio-content">
+                    <h3 class="portfolio-title">E-commerce Catalog Management</h3>
+                    <p class="portfolio-description">
+                        Complete product catalog optimization for a major Amazon seller, 
+                        including data entry, image optimization, and SEO-friendly descriptions.
+                    </p>
+                    <div class="portfolio-tags">
+                        <span class="portfolio-tag">Data Entry</span>
+                        <span class="portfolio-tag">Image Processing</span>
+                        <span class="portfolio-tag">SEO Optimization</span>
+                    </div>
+                    <div class="portfolio-footer">
+                        <div class="portfolio-client">
+                            <div class="portfolio-client-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="portfolio-client-info">
+                                <span class="portfolio-client-label">Client</span>
+                                <span class="portfolio-client-name">Amazon Seller Co.</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>Business Intelligence Dashboard</h3>
-                        <p class="portfolio-description">
-                            Custom Looker Studio dashboard providing real-time insights 
-                            into sales performance, customer behavior, and inventory levels.
-                        </p>
-                        <div class="portfolio-features">
-                            <span class="feature-tag">Data Visualization</span>
-                            <span class="feature-tag">Real-time Analytics</span>
-                            <span class="feature-tag">Custom Reporting</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Item 3 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-category">Data Cleaning</div>
-                            <h3>Customer Database Standardization</h3>
-                            <p>Cleaned 50,000+ customer records</p>
-                            <div class="portfolio-stats">
-                                <div class="stat">
-                                    <strong>99.8%</strong>
-                                    <span>Accuracy</span>
-                                </div>
-                                <div class="stat">
-                                    <strong>24h</strong>
-                                    <span>Delivery</span>
-                                </div>
-                                <div class="stat">
-                                    <strong>5,000+</strong>
-                                    <span>Duplicates Removed</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="portfolio-content">
-                        <h3>Data Quality Enhancement</h3>
-                        <p class="portfolio-description">
-                            Comprehensive data cleaning project removing duplicates, 
-                            standardizing formats, and validating contact information.
-                        </p>
-                        <div class="portfolio-features">
-                            <span class="feature-tag">Duplicate Removal</span>
-                            <span class="feature-tag">Data Validation</span>
-                            <span class="feature-tag">Format Standardization</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-category">Data Cleaning</div>
-                            <h3>Customer Database Standardization</h3>
-                            <p>Cleaned 50,000+ customer records</p>
-                            <div class="portfolio-stats">
-                                <div class="stat">
-                                    <strong>99.8%</strong>
-                                    <span>Accuracy</span>
-                                </div>
-                                <div class="stat">
-                                    <strong>24h</strong>
-                                    <span>Delivery</span>
-                                </div>
-                                <div class="stat">
-                                    <strong>5,000+</strong>
-                                    <span>Duplicates Removed</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="portfolio-content">
-                        <h3>Data Quality Enhancement</h3>
-                        <p class="portfolio-description">
-                            Comprehensive data cleaning project removing duplicates, 
-                            standardizing formats, and validating contact information.
-                        </p>
-                        <div class="portfolio-features">
-                            <span class="feature-tag">Duplicate Removal</span>
-                            <span class="feature-tag">Data Validation</span>
-                            <span class="feature-tag">Format Standardization</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-category">Data Cleaning</div>
-                            <h3>Customer Database Standardization</h3>
-                            <p>Cleaned 50,000+ customer records</p>
-                            <div class="portfolio-stats">
-                                <div class="stat">
-                                    <strong>99.8%</strong>
-                                    <span>Accuracy</span>
-                                </div>
-                                <div class="stat">
-                                    <strong>24h</strong>
-                                    <span>Delivery</span>
-                                </div>
-                                <div class="stat">
-                                    <strong>5,000+</strong>
-                                    <span>Duplicates Removed</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="portfolio-content">
-                        <h3>Data Quality Enhancement</h3>
-                        <p class="portfolio-description">
-                            Comprehensive data cleaning project removing duplicates, 
-                            standardizing formats, and validating contact information.
-                        </p>
-                        <div class="portfolio-features">
-                            <span class="feature-tag">Duplicate Removal</span>
-                            <span class="feature-tag">Data Validation</span>
-                            <span class="feature-tag">Format Standardization</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-category">Data Cleaning</div>
-                            <h3>Customer Database Standardization</h3>
-                            <p>Cleaned 50,000+ customer records</p>
-                            <div class="portfolio-stats">
-                                <div class="stat">
-                                    <strong>99.8%</strong>
-                                    <span>Accuracy</span>
-                                </div>
-                                <div class="stat">
-                                    <strong>24h</strong>
-                                    <span>Delivery</span>
-                                </div>
-                                <div class="stat">
-                                    <strong>5,000+</strong>
-                                    <span>Duplicates Removed</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="portfolio-content">
-                        <h3>Data Quality Enhancement</h3>
-                        <p class="portfolio-description">
-                            Comprehensive data cleaning project removing duplicates, 
-                            standardizing formats, and validating contact information.
-                        </p>
-                        <div class="portfolio-features">
-                            <span class="feature-tag">Duplicate Removal</span>
-                            <span class="feature-tag">Data Validation</span>
-                            <span class="feature-tag">Format Standardization</span>
-                        </div>
+                        <a href="#" class="portfolio-link">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </div>
                 </div>
             </div>
+            <!-- Portfolio Item 2 - E-commerce Analytics -->
+<div class="portfolio-item" data-category="analytics ecommerce">
+    <div class="portfolio-image-wrapper">
+        <div class="portfolio-image">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="E-commerce Analytics Dashboard" class="portfolio-img">
+            <div class="portfolio-image-overlay"></div>
+            <div class="portfolio-overlay">
+                <div class="portfolio-category">E-commerce Analytics</div>
+                <h3 class="portfolio-overlay-title">Multi-Platform Sales Dashboard</h3>
+                <p class="portfolio-overlay-desc">Unified dashboard for Amazon, Shopify & eBay sales tracking</p>
+                <div class="portfolio-stats">
+                    <div class="portfolio-stat">
+                        <strong>35%</strong>
+                        <span>Revenue Growth</span>
+                    </div>
+                    <div class="portfolio-stat">
+                        <strong>3 Days</strong>
+                        <span>Delivery Time</span>
+                    </div>
+                    <div class="portfolio-stat">
+                        <strong>5+</strong>
+                        <span>Platforms</span>
+                    </div>
+                </div>
+                <a href="#" class="portfolio-view-btn">View Case Study <i class="fas fa-arrow-right"></i></a>
+            </div>
         </div>
-    </section>
+        <div class="portfolio-image-badge">
+            <i class="fas fa-chart-pie"></i>
+        </div>
+    </div>
+    <div class="portfolio-content">
+        <h3 class="portfolio-title">E-commerce Sales Analytics</h3>
+        <p class="portfolio-description">
+            Comprehensive sales dashboard integrating data from multiple e-commerce 
+            platforms with real-time inventory tracking and customer behavior insights.
+        </p>
+        <div class="portfolio-tags">
+            <span class="portfolio-tag">Data Integration</span>
+            <span class="portfolio-tag">Real-time Analytics</span>
+            <span class="portfolio-tag">Inventory Management</span>
+        </div>
+        <div class="portfolio-footer">
+            <div class="portfolio-client">
+                <div class="portfolio-client-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div class="portfolio-client-info">
+                    <span class="portfolio-client-label">Client</span>
+                    <span class="portfolio-client-name">MultiChannel Retailer</span>
+                </div>
+            </div>
+            <a href="#" class="portfolio-link">
+                <i class="fas fa-external-link-alt"></i>
+            </a>
+        </div>
+    </div>
+</div>
 
-    <!-- ===== ABOUT SECTION ===== -->
+<!-- Portfolio Item 3 - Data Migration -->
+<div class="portfolio-item" data-category="data automation">
+    <div class="portfolio-image-wrapper">
+        <div class="portfolio-image">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Data Migration Project" class="portfolio-img">
+            <div class="portfolio-image-overlay"></div>
+            <div class="portfolio-overlay">
+                <div class="portfolio-category">Data Migration</div>
+                <h3 class="portfolio-overlay-title">ERP System Migration</h3>
+                <p class="portfolio-overlay-desc">Migrated 50,000+ records with zero data loss</p>
+                <div class="portfolio-stats">
+                    <div class="portfolio-stat">
+                        <strong>100%</strong>
+                        <span>Data Integrity</span>
+                    </div>
+                    <div class="portfolio-stat">
+                        <strong>2 Weeks</strong>
+                        <span>Project Duration</span>
+                    </div>
+                    <div class="portfolio-stat">
+                        <strong>40%</strong>
+                        <span>Time Saved</span>
+                    </div>
+                </div>
+                <a href="#" class="portfolio-view-btn">View Case Study <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="portfolio-image-badge">
+            <i class="fas fa-sync-alt"></i>
+        </div>
+    </div>
+    <div class="portfolio-content">
+        <h3 class="portfolio-title">Enterprise Data Migration</h3>
+        <p class="portfolio-description">
+            Seamless migration from legacy ERP system to modern cloud-based solution 
+            with complete data validation and integrity verification.
+        </p>
+        <div class="portfolio-tags">
+            <span class="portfolio-tag">Data Migration</span>
+            <span class="portfolio-tag">System Integration</span>
+            <span class="portfolio-tag">Quality Assurance</span>
+        </div>
+        <div class="portfolio-footer">
+            <div class="portfolio-client">
+                <div class="portfolio-client-icon">
+                    <i class="fas fa-industry"></i>
+                </div>
+                <div class="portfolio-client-info">
+                    <span class="portfolio-client-label">Client</span>
+                    <span class="portfolio-client-name">Manufacturing Corp</span>
+                </div>
+            </div>
+            <a href="#" class="portfolio-link">
+                <i class="fas fa-external-link-alt"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Portfolio Item 4 - Predictive Analytics -->
+<div class="portfolio-item" data-category="analytics automation">
+    <div class="portfolio-image-wrapper">
+        <div class="portfolio-image">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Predictive Analytics Dashboard" class="portfolio-img">
+            <div class="portfolio-image-overlay"></div>
+            <div class="portfolio-overlay">
+                <div class="portfolio-category">Predictive Analytics</div>
+                <h3 class="portfolio-overlay-title">Sales Forecasting System</h3>
+                <p class="portfolio-overlay-desc">AI-powered sales predictions with 92% accuracy</p>
+                <div class="portfolio-stats">
+                    <div class="portfolio-stat">
+                        <strong>92%</strong>
+                        <span>Accuracy Rate</span>
+                    </div>
+                    <div class="portfolio-stat">
+                        <strong>30 Days</strong>
+                        <span>Implementation</span>
+                    </div>
+                    <div class="portfolio-stat">
+                        <strong>18%</strong>
+                        <span>Cost Reduction</span>
+                    </div>
+                </div>
+                <a href="#" class="portfolio-view-btn">View Case Study <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="portfolio-image-badge">
+            <i class="fas fa-brain"></i>
+        </div>
+    </div>
+    <div class="portfolio-content">
+        <h3 class="portfolio-title">AI-Powered Sales Forecasting</h3>
+        <p class="portfolio-description">
+            Machine learning model for sales prediction with historical data analysis, 
+            seasonality detection, and automated reporting capabilities.
+        </p>
+        <div class="portfolio-tags">
+            <span class="portfolio-tag">Machine Learning</span>
+            <span class="portfolio-tag">Predictive Analytics</span>
+            <span class="portfolio-tag">Automated Reporting</span>
+        </div>
+        <div class="portfolio-footer">
+            <div class="portfolio-client">
+                <div class="portfolio-client-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="portfolio-client-info">
+                    <span class="portfolio-client-label">Client</span>
+                    <span class="portfolio-client-name">Tech Analytics Inc.</span>
+                </div>
+            </div>
+            <a href="#" class="portfolio-link">
+                <i class="fas fa-external-link-alt"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Portfolio Item 5 - Customer Data Platform -->
+<div class="portfolio-item" data-category="data analytics">
+    <div class="portfolio-image-wrapper">
+        <div class="portfolio-image">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Customer Data Platform" class="portfolio-img">
+            <div class="portfolio-image-overlay"></div>
+            <div class="portfolio-overlay">
+                <div class="portfolio-category">Customer Analytics</div>
+                <h3 class="portfolio-overlay-title">Unified Customer Profile System</h3>
+                <p class="portfolio-overlay-desc">Integrated 100,000+ customer profiles from multiple sources</p>
+                <div class="portfolio-stats">
+                    <div class="portfolio-stat">
+                        <strong>75K</strong>
+                        <span>Profiles Merged</span>
+                    </div>
+                    <div class="portfolio-stat">
+                        <strong>99.7%</strong>
+                        <span>Match Accuracy</span>
+                    </div>
+                    <div class="portfolio-stat">
+                        <strong>45%</strong>
+                        <span>Campaign ROI</span>
+                    </div>
+                </div>
+                <a href="#" class="portfolio-view-btn">View Case Study <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="portfolio-image-badge">
+            <i class="fas fa-users"></i>
+        </div>
+    </div>
+    <div class="portfolio-content">
+        <h3 class="portfolio-title">Customer Data Platform Implementation</h3>
+        <p class="portfolio-description">
+            Centralized customer data platform integrating CRM, email marketing, 
+            and support systems for 360-degree customer view and personalized marketing.
+        </p>
+        <div class="portfolio-tags">
+            <span class="portfolio-tag">Data Integration</span>
+            <span class="portfolio-tag">Customer Segmentation</span>
+            <span class="portfolio-tag">Personalization</span>
+        </div>
+        <div class="portfolio-footer">
+            <div class="portfolio-client">
+                <div class="portfolio-client-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <div class="portfolio-client-info">
+                    <span class="portfolio-client-label">Client</span>
+                    <span class="portfolio-client-name">Marketing Agency Pro</span>
+                </div>
+            </div>
+            <a href="#" class="portfolio-link">
+                <i class="fas fa-external-link-alt"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Portfolio Item 6 - Supply Chain Analytics -->
+<div class="portfolio-item" data-category="analytics automation">
+    <div class="portfolio-image-wrapper">
+        <div class="portfolio-image">
+            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Supply Chain Analytics" class="portfolio-img">
+            <div class="portfolio-image-overlay"></div>
+            <div class="portfolio-overlay">
+                <div class="portfolio-category">Supply Chain Analytics</div>
+                <h3 class="portfolio-overlay-title">Logistics Optimization System</h3>
+                <p class="portfolio-overlay-desc">Reduced logistics costs by 28% through data-driven optimization</p>
+                <div class="portfolio-stats">
+                    <div class="portfolio-stat">
+                        <strong>28%</strong>
+                        <span>Cost Reduction</span>
+                    </div>
+                    <div class="portfolio-stat">
+                        <strong>15 Days</strong>
+                        <span>Delivery Time</span>
+                    </div>
+                    <div class="portfolio-stat">
+                        <strong>40%</strong>
+                        <span>Efficiency Gain</span>
+                    </div>
+                </div>
+                <a href="#" class="portfolio-view-btn">View Case Study <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="portfolio-image-badge">
+            <i class="fas fa-shipping-fast"></i>
+        </div>
+    </div>
+    <div class="portfolio-content">
+        <h3 class="portfolio-title">Supply Chain Optimization</h3>
+        <p class="portfolio-description">
+            Advanced analytics solution for supply chain optimization including 
+            route planning, inventory forecasting, and vendor performance tracking.
+        </p>
+        <div class="portfolio-tags">
+            <span class="portfolio-tag">Route Optimization</span>
+            <span class="portfolio-tag">Inventory Forecasting</span>
+            <span class="portfolio-tag">Performance Analytics</span>
+        </div>
+        <div class="portfolio-footer">
+            <div class="portfolio-client">
+                <div class="portfolio-client-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="portfolio-client-info">
+                    <span class="portfolio-client-label">Client</span>
+                    <span class="portfolio-client-name">Global Logistics Ltd.</span>
+                </div>
+            </div>
+            <a href="#" class="portfolio-link">
+                <i class="fas fa-external-link-alt"></i>
+            </a>
+        </div>
+    </div>
+</div>
+            <!-- ... other portfolio items with updated classes ... -->
+        </div>
+        
+        <div class="portfolio-cta">
+            <p>Have a similar project in mind?</p>
+            <a href="#" class="portfolio-cta-button">Start Your Success Story <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================ ABOUT SECTION =================================== -->
+
     <section class="about" id="about">
         <div class="container">
             <div class="about-content">
@@ -747,19 +1022,19 @@
                 
                 <div class="about-stats">
                     <div class="stat-card">
-                        <div class="stat-number">500+</div>
+                        <div class="stat-number" data-target="500" data-suffix="+">0+</div>
                         <div class="stat-label">Projects Completed</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">150+</div>
+                        <div class="stat-number" data-target="150" data-suffix="+">0+</div>
                         <div class="stat-label">Happy Clients</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">99.8%</div>
+                        <div class="stat-number" data-target="99.8" data-suffix="%">0%</div>
                         <div class="stat-label">Accuracy Rate</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">48h</div>
+                        <div class="stat-number" data-target="48" data-suffix="h">0h</div>
                         <div class="stat-label">Avg. Delivery</div>
                     </div>
                 </div>
@@ -767,7 +1042,8 @@
         </div>
     </section>
 
-    <!-- ===== PROCESS SECTION ===== -->
+<!-- =========================================== PROCESS SECTION ================================= -->
+ 
     <section class="process" id="process">
         <div class="container">
             <div class="section-header">
@@ -1155,15 +1431,6 @@
             <div class="footer-bottom">
                 <div class="footer-copyright">
                     <p>&copy; 2024 DataSolution. All rights reserved.</p>
-                </div>
-                <div class="footer-payments">
-                    <div class="payment-methods">
-                        <span>We accept:</span>
-                        <i class="fab fa-cc-visa"></i>
-                        <i class="fab fa-cc-mastercard"></i>
-                        <i class="fab fa-cc-paypal"></i>
-                        <i class="fab fa-cc-amex"></i>
-                    </div>
                 </div>
             </div>
         </div>
