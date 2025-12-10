@@ -483,624 +483,665 @@ function enhancePortfolioItems() {
 // ========================================PORTFOLIO FILTERING CODE ======================================
 // =======================================================================================================
 
+// Portfolio Image Carousel Functionality
 document.addEventListener('DOMContentLoaded', function() {
+    // Carousel elements
+    const mainImage = document.querySelector('.main-image');
+    const thumbnailItems = document.querySelectorAll('.thumbnail-item');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const mainImageContainer = document.querySelector('.main-image-wrapper');
+    const portfolioSection = document.getElementById('portfolio');
     
-    // Portfolio Filtering Functionality
-    const filterButtons = document.querySelectorAll('.portfolio-filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    // Image data for carousel
+    const carouselData = [
+        {
+            index: 0,
+            largeImage: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            alt: 'E-commerce Catalog Management',
+            category: 'E-commerce',
+            title: 'Amazon Seller Catalog Optimization',
+            description: 'Processed 10,000+ products with 99.9% accuracy'
+        },
+        {
+            index: 1,
+            largeImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            alt: 'Analytics Dashboard',
+            category: 'Analytics',
+            title: 'Real-time Business Intelligence Dashboard',
+            description: 'Reduced reporting time by 85% with interactive dashboards'
+        },
+        {
+            index: 2,
+            largeImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            alt: 'Data Migration',
+            category: 'Data Migration',
+            title: 'Enterprise Data Migration Project',
+            description: 'Seamlessly migrated 2TB of data with zero downtime'
+        },
+        {
+            index: 3,
+            largeImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            alt: 'Predictive Analytics',
+            category: 'AI Analytics',
+            title: 'Predictive Analytics for Retail',
+            description: 'Increased sales forecast accuracy by 40% using AI models'
+        },
+        {
+            index: 4,
+            largeImage: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            alt: 'Customer Data',
+            category: 'Customer Data',
+            title: '360° Customer View Platform',
+            description: 'Unified 500K+ customer profiles for personalized marketing'
+        },
+        {
+            index: 5,
+            largeImage: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            alt: 'Supply Chain',
+            category: 'Supply Chain',
+            title: 'Supply Chain Optimization System',
+            description: 'Reduced logistics costs by 25% through data-driven insights'
+        },
+        {
+            index: 6,
+            largeImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            alt: 'Financial Analytics',
+            category: 'Financial Analytics',
+            title: 'Financial Risk Analysis Platform',
+            description: 'Identified $2M+ in cost-saving opportunities'
+        },
+        {
+            index: 7,
+            largeImage: 'https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            alt: 'Healthcare Data',
+            category: 'Healthcare',
+            title: 'Healthcare Data Integration',
+            description: 'Integrated patient data across 10+ healthcare systems'
+        },
+        {
+            index: 8,
+            largeImage: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            alt: 'Marketing Analytics',
+            category: 'Marketing',
+            title: 'Marketing Campaign Analytics',
+            description: 'Improved ROI by 300% through data-driven campaign optimization'
+        },
+        {
+            index: 9,
+            largeImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            alt: 'Cloud Migration',
+            category: 'Cloud Migration',
+            title: 'Cloud Infrastructure Migration',
+            description: 'Migrated entire infrastructure to cloud with 99.99% uptime'
+        }
+    ];
     
-    // Check if elements exist
-    if (filterButtons.length === 0 || portfolioItems.length === 0) {
-        console.log('Portfolio filtering elements not found');
-        return;
+    // Carousel state
+    let currentIndex = 0;
+    let autoPlayInterval;
+    const autoPlayDelay = 10000; // 10 seconds
+    let isAutoPlaying = true;
+    
+    // Issue #2 Fix: Auto-scroll prevention flag
+    let isManuallyChangingImage = false;
+    
+    // Create auto-play status indicator
+    createAutoPlayStatus();
+    
+    // Initialize carousel
+    initCarousel();
+    
+    // Initialize carousel with first image active
+    function initCarousel() {
+        // Set initial active states
+        updateMainImage(currentIndex);
+        updateActiveThumbnail(currentIndex);
+        
+        // Start auto-play
+        startAutoPlay();
+        
+        // Add keyboard navigation
+        document.addEventListener('keydown', handleKeyboardNavigation);
+        
+        // Issue #2 Fix: Add scroll event listener to prevent auto-scroll
+        setupScrollPrevention();
     }
     
-    // Add click event to each filter button
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove active class from all buttons
-            filterButtons.forEach(btn => {
-                btn.classList.remove('active');
-                btn.style.transform = 'translateY(0)';
-            });
-            
-            // Add active class to clicked button with animation
-            this.classList.add('active');
-            this.style.transform = 'translateY(-3px)';
-            
-            // Get filter value
-            const filterValue = this.getAttribute('data-filter');
-            
-            // Animate filter change
-            animateFilterChange(filterValue);
-        });
-    });
-    
-    // Filter animation function - FIXED
-    function animateFilterChange(filterValue) {
-        let visibleItems = [];
-        
-        // Clear any existing no-results message
-        const existingMessage = document.querySelector('.no-results-message');
-        if (existingMessage) {
-            existingMessage.remove();
-        }
-        
-        // Check which items should be visible
-        portfolioItems.forEach(item => {
-            const categories = item.getAttribute('data-category');
-            const categoryArray = categories ? categories.split(' ') : [];
-            
-            // FIX: Exact category matching
-            if (filterValue === 'all' || categoryArray.includes(filterValue)) {
-                visibleItems.push(item);
-            }
-        });
-        
-        // First, hide items that shouldn't be visible
-        portfolioItems.forEach(item => {
-            const categories = item.getAttribute('data-category');
-            const categoryArray = categories ? categories.split(' ') : [];
-            
-            if (filterValue === 'all' || categoryArray.includes(filterValue)) {
-                // Will show this item
-                item.style.display = 'flex';
-                item.classList.remove('hidden');
-            } else {
-                // Hide this item immediately
-                item.style.display = 'none';
-                item.classList.add('hidden');
-            }
-        });
-        
-        // If no items found, show message
-        if (visibleItems.length === 0 && filterValue !== 'all') {
-            showNoResultsMessage();
-            return;
-        }
-        
-        // Animate visible items with staggered effect
-        visibleItems.forEach((item, index) => {
-            // Reset for animation
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(20px)';
-            item.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            
-            // Staggered animation
-            setTimeout(() => {
-                item.style.opacity = '1';
-                item.style.transform = 'translateY(0)';
-            }, index * 80);
-        });
-    }
-    
-    // No results message
-    function showNoResultsMessage() {
-        let message = document.querySelector('.no-results-message');
-        if (!message) {
-            message = document.createElement('div');
-            message.className = 'no-results-message';
-            message.innerHTML = `
-                <div style="text-align: center; padding: 40px; background: var(--dark-card); 
-                     border-radius: 12px; border: 1px solid var(--border-color); margin-top: 30px; grid-column: 1 / -1;">
-                    <i class="fas fa-search" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 20px;"></i>
-                    <h3 style="color: var(--text-primary); margin-bottom: 10px;">No Projects Found</h3>
-                    <p style="color: var(--text-secondary);">Try selecting a different filter category.</p>
-                    <button class="btn btn-primary" style="margin-top: 20px;" onclick="document.querySelector('.portfolio-filter-btn[data-filter=\"all\"]').click()">
-                        Show All Projects
-                    </button>
-                </div>
-            `;
-            document.querySelector('.portfolio-grid').appendChild(message);
-        }
-    }
-    
-    // Initialize with all items visible
-    animateFilterChange('all');
-    
-    // Add CSS for filtering animations - IMPROVED
-    const style = document.createElement('style');
-    style.textContent = `
-        .portfolio-item {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-            will-change: transform, opacity;
-        }
-        
-        .portfolio-filter-btn {
-            transition: all 0.3s ease !important;
-            cursor: pointer;
-        }
-        
-        .portfolio-filter-btn.active {
-            background: var(--gradient-1) !important;
-            color: white !important;
-            border-color: transparent !important;
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3) !important;
-        }
-        
-        .portfolio-filter-btn:not(.active):hover {
-            transform: translateY(-2px);
-            background: rgba(99, 102, 241, 0.1) !important;
-        }
-        
-        @media (max-width: 768px) {
-            .portfolio-section-controls {
-                overflow-x: auto;
-                padding-bottom: 15px;
-                justify-content: flex-start;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: thin;
-            }
-            
-            .portfolio-section-controls::-webkit-scrollbar {
-                height: 4px;
-            }
-            
-            .portfolio-section-controls::-webkit-scrollbar-track {
-                background: var(--dark-surface);
-            }
-            
-            .portfolio-section-controls::-webkit-scrollbar-thumb {
-                background: var(--primary);
-                border-radius: 2px;
-            }
-            
-            .portfolio-filter-btn {
-                white-space: nowrap;
-                font-size: 0.9rem;
-                padding: 10px 20px;
-                flex-shrink: 0;
-            }
-        }
-        
-        .portfolio-item.hidden {
-            display: none !important;
-            opacity: 0 !important;
-            transform: translateY(20px) !important;
-            pointer-events: none;
-        }
-        
-        .portfolio-item:not(.hidden) {
-            display: flex !important;
-            animation: fadeInUp 0.4s ease forwards;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Fix for overlay positioning */
-        .portfolio-overlay {
-            z-index: 10;
-            pointer-events: none;
-        }
-        
-        .portfolio-item:hover .portfolio-overlay {
-            pointer-events: auto;
-        }
-        
-        /* Fix for button inside portfolio item */
-        .portfolio-view-btn {
-            pointer-events: auto;
-        }
-    `;
-    document.head.appendChild(style);
-    
-    // Portfolio item hover effects
-    portfolioItems.forEach(item => {
-        // Desktop hover effects - IMPROVED
-        if (window.innerWidth > 768) {
-            item.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px)';
-                this.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(99, 102, 241, 0.3)';
-                this.style.zIndex = '5';
-                
-                // Bring overlay to front
-                const overlay = this.querySelector('.portfolio-overlay');
-                if (overlay) {
-                    overlay.style.zIndex = '15';
-                }
-            });
-            
-            item.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-                this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.3)';
-                this.style.zIndex = '1';
-                
-                // Reset overlay
-                const overlay = this.querySelector('.portfolio-overlay');
-                if (overlay) {
-                    overlay.style.zIndex = '10';
-                }
-            });
-        }
-        
-        // Mobile touch effects - IMPROVED
-        item.addEventListener('touchstart', function(e) {
-            if (window.innerWidth <= 768) {
+    // Issue #2 Fix: Setup scroll prevention
+    function setupScrollPrevention() {
+        // Listen for click events that might cause scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                this.style.transform = 'scale(0.98)';
-                
-                // Show overlay on mobile tap
-                const overlay = this.querySelector('.portfolio-overlay');
-                if (overlay) {
-                    const isVisible = overlay.style.opacity === '1';
-                    overlay.style.opacity = isVisible ? '0' : '1';
-                    overlay.style.pointerEvents = isVisible ? 'none' : 'auto';
-                }
-            }
-        }, { passive: false });
-        
-        item.addEventListener('touchend', function() {
-            if (window.innerWidth <= 768) {
-                setTimeout(() => {
-                    this.style.transform = 'scale(1)';
-                }, 150);
-            }
-        });
-    });
-    
-    // Close overlay when clicking outside (for mobile)
-    document.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768 && !e.target.closest('.portfolio-item')) {
-            portfolioItems.forEach(item => {
-                const overlay = item.querySelector('.portfolio-overlay');
-                if (overlay) {
-                    overlay.style.opacity = '0';
-                    overlay.style.pointerEvents = 'none';
-                }
             });
-        }
-    });
-    
-    // Portfolio CTA button click
-    const portfolioCTA = document.querySelector('.portfolio-cta-button');
-    if (portfolioCTA) {
-        portfolioCTA.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Smooth scroll to contact section
-            const contactSection = document.querySelector('#contact');
-            if (contactSection) {
-                contactSection.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            } else {
-                // If no contact section, scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
         });
+        
+        // Prevent scrollIntoView from scrolling the page
+        const originalScrollIntoView = Element.prototype.scrollIntoView;
+        Element.prototype.scrollIntoView = function(options) {
+            // Only allow smooth scrolling within our carousel
+            if (this.closest('.image-carousel-wrapper') && options && options.behavior === 'smooth') {
+                // Call the original but with preventScroll option
+                originalScrollIntoView.call(this, { 
+                    behavior: 'smooth', 
+                    block: 'nearest',
+                    inline: 'center'
+                });
+            }
+        };
     }
     
-    // Portfolio view buttons - IMPROVED
-    const viewButtons = document.querySelectorAll('.portfolio-view-btn');
-    viewButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // Get parent portfolio item
-            const portfolioItem = this.closest('.portfolio-item');
-            const title = portfolioItem.querySelector('.portfolio-title').textContent;
-            const category = portfolioItem.getAttribute('data-category');
-            
-            // Show detailed modal
-            showCaseStudyModal(title, category);
-        });
-    });
-    
-    // Case study modal function - IMPROVED
-    function showCaseStudyModal(title, category) {
-        // Remove any existing modal
-        const existingModal = document.querySelector('.case-study-modal');
-        if (existingModal) {
-            existingModal.remove();
-        }
-        
-        const modal = document.createElement('div');
-        modal.className = 'case-study-modal';
-        modal.innerHTML = `
-            <div class="modal-overlay"></div>
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div>
-                        <span class="modal-category">${category.toUpperCase()}</span>
-                        <h3>${title}</h3>
-                    </div>
-                    <button class="modal-close">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="modal-preview">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" alt="${title}" style="width:100%;border-radius:8px;margin-bottom:20px;">
-                    </div>
-                    <div class="modal-details">
-                        <h4>Project Details</h4>
-                        <p>This is a detailed case study of the project. In a real implementation, this content would be dynamically loaded from a database.</p>
-                        
-                        <div class="modal-stats">
-                            <div class="modal-stat">
-                                <strong>99.8%</strong>
-                                <span>Accuracy</span>
-                            </div>
-                            <div class="modal-stat">
-                                <strong>48h</strong>
-                                <span>Delivery</span>
-                            </div>
-                            <div class="modal-stat">
-                                <strong>95%</strong>
-                                <span>Client Satisfaction</span>
-                            </div>
-                        </div>
-                        
-                        <h4>Key Achievements</h4>
-                        <ul>
-                            <li>Increased operational efficiency by 40%</li>
-                            <li>Reduced data processing time by 60%</li>
-                            <li>Improved data accuracy to 99.8%</li>
-                            <li>Client reported 25% growth in productivity</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" id="closeModal">
-                        <i class="fas fa-times"></i> Close
-                    </button>
-                    <button class="btn btn-primary" id="getQuote">
-                        <i class="fas fa-paper-plane"></i> Get Quote
-                    </button>
-                </div>
-            </div>
+    // Create auto-play status indicator
+    function createAutoPlayStatus() {
+        const autoPlayStatus = document.createElement('div');
+        autoPlayStatus.className = 'auto-play-status';
+        autoPlayStatus.innerHTML = `
+            <div class="status-text">Auto-play</div>
+            <div class="status-indicator ${isAutoPlaying ? 'active' : ''}"></div>
+            <button class="toggle-auto-play" title="${isAutoPlaying ? 'Pause' : 'Play'}">
+                <i class="fas fa-${isAutoPlaying ? 'pause' : 'play'}"></i>
+            </button>
         `;
         
-        document.body.appendChild(modal);
+        mainImageContainer.appendChild(autoPlayStatus);
         
-        // Close modal events
-        const closeModal = () => modal.remove();
-        
-        modal.querySelector('.modal-close').addEventListener('click', closeModal);
-        modal.querySelector('.modal-overlay').addEventListener('click', closeModal);
-        modal.querySelector('#closeModal').addEventListener('click', closeModal);
-        
-        // Get Quote button
-        modal.querySelector('#getQuote').addEventListener('click', function() {
-            modal.remove();
-            const contactSection = document.querySelector('#contact');
-            if (contactSection) {
-                contactSection.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-        
-        // Prevent body scroll when modal is open
-        document.body.style.overflow = 'hidden';
-        modal.addEventListener('click', function(e) {
-            if (e.target === this.querySelector('.modal-overlay')) {
-                document.body.style.overflow = '';
-            }
-        });
+        // Add click event to toggle auto-play
+        const toggleBtn = autoPlayStatus.querySelector('.toggle-auto-play');
+        toggleBtn.addEventListener('click', toggleAutoPlay);
     }
     
-    // Add modal CSS - IMPROVED
-    const modalStyle = document.createElement('style');
-    modalStyle.textContent = `
-        .case-study-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+    // Update auto-play status UI
+    function updateAutoPlayStatus() {
+        const statusIndicator = document.querySelector('.status-indicator');
+        const toggleBtn = document.querySelector('.toggle-auto-play');
+        const icon = toggleBtn.querySelector('i');
+        
+        if (isAutoPlaying) {
+            statusIndicator.classList.add('active');
+            icon.className = 'fas fa-pause';
+            toggleBtn.title = 'Pause';
+        } else {
+            statusIndicator.classList.remove('active');
+            icon.className = 'fas fa-play';
+            toggleBtn.title = 'Play';
+        }
+    }
+    
+    // Toggle auto-play on/off
+    function toggleAutoPlay() {
+        isAutoPlaying = !isAutoPlaying;
+        
+        if (isAutoPlaying) {
+            startAutoPlay();
+        } else {
+            stopAutoPlay();
         }
         
-        .modal-overlay {
+        updateAutoPlayStatus();
+        
+        // Add visual feedback
+        const toggleBtn = document.querySelector('.toggle-auto-play');
+        toggleBtn.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+            toggleBtn.style.transform = 'scale(1)';
+        }, 150);
+    }
+    
+    // Start auto-play
+    function startAutoPlay() {
+        stopAutoPlay(); // Clear any existing interval
+        
+        autoPlayInterval = setInterval(() => {
+            nextImage();
+        }, autoPlayDelay);
+        
+        // Visual indicator for auto-play start
+        highlightAutoPlayStatus();
+    }
+    
+    // Stop auto-play
+    function stopAutoPlay() {
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+        }
+    }
+    
+    // Highlight auto-play status briefly
+    function highlightAutoPlayStatus() {
+        if (!isAutoPlaying) return;
+        
+        const statusIndicator = document.querySelector('.status-indicator');
+        statusIndicator.style.animation = 'pulseIndicator 0.5s ease';
+        
+        setTimeout(() => {
+            statusIndicator.style.animation = 'pulseIndicator 2s infinite';
+        }, 500);
+    }
+    
+    // Update main image based on index
+    function updateMainImage(index) {
+        const imageData = carouselData[index];
+        
+        // Create new image element
+        const newImage = document.createElement('img');
+        newImage.src = imageData.largeImage;
+        newImage.alt = imageData.alt;
+        newImage.className = 'main-image';
+        
+        // Add to DOM before current image
+        const currentImage = document.querySelector('.main-image.active');
+        currentImage.parentNode.insertBefore(newImage, currentImage);
+        
+        // Wait for new image to load
+        newImage.onload = function() {
+            // Remove active class from current image
+            currentImage.classList.remove('active');
+            currentImage.classList.add('fading-out');
+            
+            // Add active class to new image
+            newImage.classList.add('active');
+            
+            // Remove old image after transition
+            setTimeout(() => {
+                if (currentImage.parentNode) {
+                    currentImage.parentNode.removeChild(currentImage);
+                }
+            }, 800);
+            
+            // Update overlay content
+            updateOverlayContent(imageData);
+            
+            // Add visual effect to main container
+            addMainImageEffect();
+        };
+    }
+    
+    // Update overlay content
+    function updateOverlayContent(data) {
+        const overlayContent = document.querySelector('.overlay-content');
+        
+        // Create new overlay content
+        overlayContent.innerHTML = `
+            <span class="image-category" style="background: rgba(99, 102, 241, 0.2); color: #a5b4fc; padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; letter-spacing: 1px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(99, 102, 241, 0.3);">
+                ${data.category}
+            </span>
+            <h3 class="image-title">${data.title}</h3>
+            <p class="image-description">${data.description}</p>
+        `;
+        
+        // Animate in
+        overlayContent.style.animation = 'none';
+        setTimeout(() => {
+            overlayContent.style.animation = 'fadeInUp 0.6s ease forwards';
+        }, 10);
+    }
+    
+    // Update active thumbnail
+    function updateActiveThumbnail(index) {
+        // Remove active class from all thumbnails
+        thumbnailItems.forEach(item => {
+            item.classList.remove('active');
+            
+            // Reset animation for non-active thumbnails
+            if (parseInt(item.dataset.index) !== index) {
+                item.style.animationPlayState = 'running';
+            }
+        });
+        
+        // Add active class to current thumbnail
+        const activeThumbnail = document.querySelector(`.thumbnail-item[data-index="${index}"]`);
+        if (activeThumbnail) {
+            activeThumbnail.classList.add('active');
+            
+            // Pause animation for active thumbnail
+            activeThumbnail.style.animationPlayState = 'paused';
+            
+            // Issue #2 Fix: Use custom scroll function instead of scrollIntoView
+            scrollThumbnailIntoViewCustom(activeThumbnail);
+            
+            // Add visual effect to active thumbnail
+            addThumbnailEffect(activeThumbnail);
+        }
+    }
+    
+    // Issue #2 Fix: Custom scroll function that doesn't scroll the whole page
+    function scrollThumbnailIntoViewCustom(thumbnail) {
+        const gallery = document.querySelector('.thumbnail-gallery');
+        const galleryRect = gallery.getBoundingClientRect();
+        const thumbnailRect = thumbnail.getBoundingClientRect();
+        
+        // Check if thumbnail is not fully visible
+        if (thumbnailRect.left < galleryRect.left || thumbnailRect.right > galleryRect.right) {
+            // Calculate scroll position
+            const scrollLeft = thumbnail.offsetLeft - (gallery.offsetWidth / 2) + (thumbnail.offsetWidth / 2);
+            
+            // Smooth scroll within the gallery only
+            gallery.scrollTo({
+                left: scrollLeft,
+                behavior: 'smooth'
+            });
+        }
+    }
+    
+    // Add visual effect to main image
+    function addMainImageEffect() {
+        const mainContainer = document.querySelector('.main-image-container');
+        
+        // Add glow effect
+        mainContainer.style.boxShadow = '0 0 40px rgba(99, 102, 241, 0.5)';
+        
+        // Reset after animation
+        setTimeout(() => {
+            mainContainer.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.5)';
+        }, 500);
+    }
+    
+    // Add visual effect to thumbnail
+    function addThumbnailEffect(thumbnail) {
+        // Add pulse effect
+        thumbnail.style.boxShadow = '0 0 25px rgba(99, 102, 241, 0.7)';
+        
+        // Reset after animation
+        setTimeout(() => {
+            if (thumbnail.classList.contains('active')) {
+                thumbnail.style.boxShadow = '0 15px 30px rgba(99, 102, 241, 0.3)';
+            } else {
+                thumbnail.style.boxShadow = 'none';
+            }
+        }, 500);
+    }
+    
+    // Go to next image
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % carouselData.length;
+        changeImage(currentIndex);
+    }
+    
+    // Go to previous image
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + carouselData.length) % carouselData.length;
+        changeImage(currentIndex);
+    }
+    
+    // Change image with transition
+    function changeImage(index) {
+        // Reset auto-play timer when manually changing image
+        if (isAutoPlaying) {
+            restartAutoPlay();
+        }
+        
+        currentIndex = index;
+        updateMainImage(currentIndex);
+        updateActiveThumbnail(currentIndex);
+    }
+    
+    // Restart auto-play timer
+    function restartAutoPlay() {
+        stopAutoPlay();
+        startAutoPlay();
+        highlightAutoPlayStatus();
+    }
+    
+    // Handle keyboard navigation
+    function handleKeyboardNavigation(e) {
+        if (e.key === 'ArrowLeft') {
+            prevImage();
+            e.preventDefault();
+        } else if (e.key === 'ArrowRight') {
+            nextImage();
+            e.preventDefault();
+        } else if (e.key === ' ' || e.key === 'Spacebar') {
+            toggleAutoPlay();
+            e.preventDefault();
+        }
+    }
+    
+    // Add click events to thumbnails
+    thumbnailItems.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function(e) {
+            e.preventDefault();
+            const index = parseInt(this.dataset.index);
+            isManuallyChangingImage = true;
+            changeImage(index);
+            
+            // Add click effect
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+                isManuallyChangingImage = false;
+            }, 150);
+        });
+    });
+    
+    // Add click events to arrow buttons
+    prevBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        isManuallyChangingImage = true;
+        prevImage();
+        addButtonClickEffect(this);
+        setTimeout(() => {
+            isManuallyChangingImage = false;
+        }, 150);
+    });
+    
+    nextBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        isManuallyChangingImage = true;
+        nextImage();
+        addButtonClickEffect(this);
+        setTimeout(() => {
+            isManuallyChangingImage = false;
+        }, 150);
+    });
+    
+    // Add click effect to buttons
+    function addButtonClickEffect(button) {
+        button.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+            button.style.transform = '';
+        }, 150);
+    }
+    
+    // Add hover effect to controls
+    const controlButtons = document.querySelectorAll('.control-btn');
+    controlButtons.forEach(btn => {
+        btn.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.1)';
+            this.style.boxShadow = '0 0 25px rgba(99, 102, 241, 0.6)';
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+            if (!this.style.transform.includes('0.9')) {
+                this.style.transform = 'scale(1)';
+            }
+            this.style.boxShadow = '';
+        });
+    });
+    
+    // Add touch swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    mainImageContainer.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    mainImageContainer.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+    
+    // Handle swipe gestures
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const difference = touchStartX - touchEndX;
+        
+        if (Math.abs(difference) > swipeThreshold) {
+            if (difference > 0) {
+                // Swipe left - next image
+                nextImage();
+            } else {
+                // Swipe right - previous image
+                prevImage();
+            }
+        }
+    }
+    
+    // Add progress indicator for auto-play
+    createProgressIndicator();
+    
+    // Create visual progress indicator for auto-play
+    function createProgressIndicator() {
+        const progressContainer = document.createElement('div');
+        progressContainer.className = 'auto-play-progress';
+        progressContainer.style.cssText = `
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: rgba(15, 15, 35, 0.95);
-            backdrop-filter: blur(10px);
-        }
-        
-        .modal-content {
-            position: relative;
-            background: var(--dark-card);
-            border-radius: 16px;
-            max-width: 800px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-            animation: modalSlideUp 0.3s ease;
-        }
-        
-        .modal-header {
-            padding: 24px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            background: var(--dark-surface);
-            border-radius: 16px 16px 0 0;
-        }
-        
-        .modal-header h3 {
-            margin: 10px 0 0 0;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-        }
-        
-        .modal-category {
-            display: inline-block;
-            background: var(--gradient-1);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .modal-close {
+            height: 4px;
             background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.8rem;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: var(--transition);
-            flex-shrink: 0;
-        }
+            z-index: 3;
+            border-radius: 0 0 20px 20px;
+            overflow: hidden;
+        `;
         
-        .modal-close:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(90deg);
-        }
+        const progressBar = document.createElement('div');
+        progressBar.className = 'progress-bar';
+        progressBar.style.cssText = `
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            transition: width ${autoPlayDelay/1000}s linear;
+            border-radius: 0 0 20px 20px;
+        `;
         
-        .modal-body {
-            padding: 24px;
-        }
+        progressContainer.appendChild(progressBar);
+        mainImageContainer.appendChild(progressContainer);
         
-        .modal-details h4 {
-            color: var(--primary);
-            margin: 20px 0 10px 0;
-            font-size: 1.2rem;
-        }
+        // Update progress bar
+        updateProgressBar();
+    }
+    
+    // Update progress bar animation
+    function updateProgressBar() {
+        const progressBar = document.querySelector('.progress-bar');
         
-        .modal-stats {
-            display: flex;
-            gap: 15px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-        
-        .modal-stat {
-            text-align: center;
-            background: rgba(99, 102, 241, 0.1);
-            padding: 15px;
-            border-radius: 12px;
-            min-width: 100px;
-            flex: 1;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-        }
-        
-        .modal-stat strong {
-            display: block;
-            font-size: 1.8rem;
-            color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .modal-stat span {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
-        }
-        
-        .modal-body ul {
-            margin: 15px 0;
-            padding-left: 20px;
-        }
-        
-        .modal-body li {
-            margin-bottom: 8px;
-            color: var(--text-secondary);
-            position: relative;
-            padding-left: 10px;
-        }
-        
-        .modal-body li:before {
-            content: '✓';
-            position: absolute;
-            left: -15px;
-            color: var(--secondary);
-            font-weight: bold;
-        }
-        
-        .modal-footer {
-            padding: 24px;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            gap: 15px;
-            justify-content: flex-end;
-        }
-        
-        .modal-footer .btn {
-            min-width: 140px;
-        }
-        
-        @keyframes modalSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px) scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .modal-content {
-                max-height: 95vh;
-                margin: 10px;
-            }
+        if (isAutoPlaying) {
+            // Reset and animate progress bar
+            progressBar.style.transition = 'none';
+            progressBar.style.width = '0%';
             
-            .modal-header {
-                padding: 20px;
-            }
+            // Force reflow
+            progressBar.offsetHeight;
             
-            .modal-body {
-                padding: 20px;
+            // Start animation
+            progressBar.style.transition = `width ${autoPlayDelay/1000}s linear`;
+            progressBar.style.width = '100%';
+        } else {
+            // Pause progress bar
+            const computedStyle = window.getComputedStyle(progressBar);
+            const currentWidth = computedStyle.getPropertyValue('width');
+            progressBar.style.transition = 'none';
+            progressBar.style.width = currentWidth;
+        }
+    }
+    
+    // Listen for auto-play changes to update progress bar
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const target = mutation.target;
+                if (target.classList.contains('status-indicator')) {
+                    updateProgressBar();
+                }
             }
-            
-            .modal-footer {
-                padding: 20px;
-                flex-direction: column;
-            }
-            
-            .modal-footer .btn {
-                width: 100%;
-            }
-            
-            .modal-stats {
-                flex-direction: column;
-            }
+        });
+    });
+    
+    const statusIndicator = document.querySelector('.status-indicator');
+    if (statusIndicator) {
+        observer.observe(statusIndicator, { attributes: true });
+    }
+    
+    // Add CSS for progress bar animation
+    const progressStyle = document.createElement('style');
+    progressStyle.textContent = `
+        @keyframes progressAnimation {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        
+        .progress-bar {
+            animation: progressAnimation ${autoPlayDelay/1000}s linear infinite;
+        }
+        
+        .main-image.fading-out {
+            animation: fadeOut 0.8s ease forwards;
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
         }
     `;
-    document.head.appendChild(modalStyle);
+    document.head.appendChild(progressStyle);
     
-    // Add keyboard support for modal
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            const modal = document.querySelector('.case-study-modal');
-            if (modal) {
-                modal.remove();
-                document.body.style.overflow = '';
+    // Issue #1 Fix: Update CSS for image-category styling
+    const categoryStyle = document.createElement('style');
+    categoryStyle.textContent = `
+        .image-category {
+            background: rgba(99, 102, 241, 0.15) !important;
+            color: #c7d2fe !important;
+            padding: 6px 16px !important;
+            border-radius: 20px !important;
+            font-size: 0.9rem !important;
+            font-weight: 600 !important;
+            letter-spacing: 1px !important;
+            display: inline-block !important;
+            margin-bottom: 1rem !important;
+            border: 1px solid rgba(99, 102, 241, 0.3) !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+        }
+        
+        /* Override any existing styles that might be hiding the text */
+        .overlay-content span {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+    `;
+    document.head.appendChild(categoryStyle);
+    
+    // Pause auto-play when page is not visible
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            // Page is hidden, pause auto-play
+            const wasAutoPlaying = isAutoPlaying;
+            if (isAutoPlaying) {
+                stopAutoPlay();
+                isAutoPlaying = false;
+                updateAutoPlayStatus();
             }
+            
+            // Restore state when page becomes visible again
+            document.addEventListener('visibilitychange', function restoreState() {
+                if (!document.hidden && wasAutoPlaying) {
+                    isAutoPlaying = true;
+                    startAutoPlay();
+                    updateAutoPlayStatus();
+                    document.removeEventListener('visibilitychange', restoreState);
+                }
+            }, { once: true });
+        }
+    });
+    
+    // Issue #2 Fix: Prevent any anchor links from scrolling the page
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.thumbnail-item') || 
+            e.target.closest('.control-btn') ||
+            e.target.closest('.toggle-auto-play')) {
+            e.preventDefault();
         }
     });
 });
